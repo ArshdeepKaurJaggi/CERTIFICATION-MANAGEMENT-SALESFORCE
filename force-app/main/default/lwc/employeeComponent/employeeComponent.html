@@ -1,0 +1,46 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Add Employee">
+            <lightning-card title="Employee" icon-name="action:new_person_account">
+                <lightning-record-edit-form object-api-name="Employee__c">
+                    <!-- <lightning-input-field field-name="Emp_Name__c">
+                    </lightning-input-field> -->
+                    <div class="slds-m-around_medium">
+                        <lightning-input label="Employee Name" onchange={handlechange}></lightning-input>
+                        <lightning-input label="Employee Email" onchange={handlechange}></lightning-input>
+                        <lightning-input label="Primary Skill" onchange={handlechange}></lightning-input>
+                        <lightning-input label="Secondary Skill" onchange={handlechange}></lightning-input>
+                        <lightning-input label="Experience" onchange={handlechange}></lightning-input>
+                        <lightning-input label="Comments" onchange={handlechange}></lightning-input>
+                        <lightning-button label={buttonlabel} variant="brand" onclick={submit}></lightning-button>
+                        <!-- <lightning-button class="slds-m-top_small" label="Cancel" onclick={handleReset}></lightning-button> -->
+                    </div>
+                </lightning-record-edit-form>
+            </lightning-card>
+        </lightning-tab>
+        <lightning-tab label="Employee Details" title="2nd tab extended title">
+            <lightning-card title="Employee" icon-name="standard:record">
+                <div class="slds-m-around_medium">
+                    <template if:true={emps.data}>
+                        <lightning-datatable
+                            key-field="Id"
+                            onsave={handleSave}
+                            data={emps.data}
+                            onrowselection={handleClickAdd}
+                            draft-values={draftValues}
+                            columns={columns}></lightning-datatable>
+                            <center><lightning-button variant="destructive" 
+                                label="Delete" 
+                                icon-name="utility:delete"
+                                icon-position="right"
+                                onclick={deleteRec}></lightning-button></center>
+                    </template> 
+                    <template if:true={emps.error}>
+                        <!-- handle Apex error -->
+                    </template>
+                </div>
+            </lightning-card>
+        </lightning-tab>
+       
+    </lightning-tabset>  
+</template>

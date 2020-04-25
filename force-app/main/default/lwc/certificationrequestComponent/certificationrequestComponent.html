@@ -1,0 +1,34 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Add Certification Request">
+            <lightning-card title="Certification Request" icon-name="standard:skill_requirement">
+                <div style="margin: auto;">
+                    <lightning-record-form object-api-name="Certification_Request__c" onsuccess={handleSuccess} fields={fields}>
+                    </lightning-record-form>
+                </div>
+            </lightning-card>
+        </lightning-tab>
+        <lightning-tab label="Certification Request Details" title="2nd tab extended title">
+            <lightning-card title="Certification" icon-name="standard:skill_requirement">
+                <div class="slds-m-around_medium">
+                    <template if:true={data}>
+                        <lightning-datatable
+                            key-field="Id"
+                            data={data}
+                            onsave={handleSave}
+                            onrowselection={handleClickAdd}
+                            draft-values={draftValues}
+                            columns={columns}></lightning-datatable>
+                    </template> 
+                    <center>
+                        <lightning-button variant="destructive" label="Delete" icon-name="utility:delete"
+                            icon-position="right" onclick={deleteRec}></lightning-button>
+                    </center>
+                    <template if:true={error}> -->
+                        <!-- handle Apex error -->
+                      </template>
+                </div> 
+            </lightning-card>
+        </lightning-tab>
+    </lightning-tabset>  
+</template>

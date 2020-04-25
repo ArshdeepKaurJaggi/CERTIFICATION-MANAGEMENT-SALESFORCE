@@ -1,0 +1,29 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Add Voucher">
+            <lightning-card title="Add an Voucher" icon-name="action:user">
+                <div style="margin: auto;">
+                    <lightning-record-form object-api-name="Voucher__c" onsuccess={handleSuccess} fields={fields}>
+                    </lightning-record-form>
+                </div>
+            </lightning-card>
+        </lightning-tab>
+        <lightning-tab label="Voucher Details" title="2nd tab extended title">
+            <lightning-card title="Voucher" icon-name="standard:record">
+                <div class="slds-m-around_medium">
+                    <template if:true={data}>
+                        <lightning-datatable key-field="Id" data={data} columns={columns}
+                        onsave={handleSave}
+                        onrowselection={handleClickAdd}
+                        draft-values={draftValues}>
+                        </lightning-datatable>
+                        <center>
+                            <lightning-button variant="destructive" label="Delete" icon-name="utility:delete"
+                                icon-position="right" onclick={deleteRec}></lightning-button>
+                        </center>
+                    </template>
+                </div>
+            </lightning-card>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

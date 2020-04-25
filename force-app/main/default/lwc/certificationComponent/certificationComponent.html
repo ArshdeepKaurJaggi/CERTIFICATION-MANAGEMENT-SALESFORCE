@@ -1,0 +1,40 @@
+<template>
+    <lightning-tabset>
+        <lightning-tab label="Add Certification">
+            <lightning-card title="Certification" icon-name="action:clone">
+                <lightning-record-edit-form object-api-name="Certification__c">
+                    <div class="slds-m-around_medium">
+                        <lightning-input label="Certification Name" onchange={handlechange}></lightning-input>
+                        <lightning-input label="Comments" onchange={handlechange}></lightning-input>
+                        <lightning-button label={buttonlabel} variant="brand" onclick={submit}></lightning-button>
+                        <!-- <lightning-button class="slds-m-top_small" label="Cancel" onclick={handleReset}></lightning-button> -->
+                    </div>
+                </lightning-record-edit-form>
+            </lightning-card>
+        </lightning-tab>
+        <lightning-tab label="Certification Details" title="2nd tab extended title">
+            <lightning-card title="Certification" icon-name="action:clone">
+                <div class="slds-m-around_medium">
+                    <template if:true={cert.data}>
+                        <lightning-datatable
+                            key-field="Id"
+                            onsave={handleSave}
+                            data={cert.data}
+                            onrowselection={handleClickAdd}
+                            draft-values={draftValues}
+                            columns={columns}></lightning-datatable>
+                            <center><lightning-button variant="destructive" 
+                                label="Delete" 
+                                icon-name="utility:delete"
+                                icon-position="right"
+                                onclick={deleteRec}></lightning-button></center>
+                    </template> 
+                    <template if:true={cert.error}>
+                        <!-- handle Apex error -->
+                    </template>
+                </div>
+                
+            </lightning-card>
+        </lightning-tab>
+    </lightning-tabset>  
+</template>
