@@ -3,8 +3,6 @@
         <lightning-tab label="Add Employee">
             <lightning-card title="Employee" icon-name="action:new_person_account">
                 <lightning-record-edit-form object-api-name="Employee__c">
-                    <!-- <lightning-input-field field-name="Emp_Name__c">
-                    </lightning-input-field> -->
                     <div class="slds-m-around_medium">
                         <lightning-input label="Employee Name" onchange={handlechange}></lightning-input>
                         <lightning-input label="Employee Email" onchange={handlechange}></lightning-input>
@@ -13,7 +11,6 @@
                         <lightning-input label="Experience" onchange={handlechange}></lightning-input>
                         <lightning-input label="Comments" onchange={handlechange}></lightning-input>
                         <lightning-button label={buttonlabel} variant="brand" onclick={submit}></lightning-button>
-                        <!-- <lightning-button class="slds-m-top_small" label="Cancel" onclick={handleReset}></lightning-button> -->
                     </div>
                 </lightning-record-edit-form>
             </lightning-card>

@@ -120,7 +120,6 @@ export default class EmployeeComponent extends LightningElement {
         let selectedIdsArray = [];
 
         for (const element of selected) {
-            //console.log('elementid', element.Id);
             selectedIdsArray.push(element.Id);
         }
         this.recId = selectedIdsArray[0];
@@ -151,43 +150,7 @@ export default class EmployeeComponent extends LightningElement {
             location.reload();
     }
 
-    // handleSave(event) {
-    //     console.log("save");
-    //     const fields = {};
-    //     fields[ID.fieldApiName] = event.detail.draftValues[0].Id;
-    //     fields[EmpName.fieldApiName] = event.detail.draftValues[0].Emp_Name__c;
-    //     fields[EmpEmail.fieldApiName] = event.detail.draftValues[0].Emp_Email__c;
-    //     fields[PrimarySkill.fieldApiName] = event.detail.draftValues[0].Primary_Skill__c;
-    //     fields[SecondarySkill.fieldApiName] = event.detail.draftValues[0].Secondary_Skill__c;
-    //     fields[Experience.fieldApiName] = event.detail.draftValues[0].Experience__c;
-    //     fields[Comments.fieldApiName] = event.detail.draftValues[0].Comments__c;
-    //     const recordInput = {fields};
-        
-    //     updateRecord(recordInput)
-    //     .then(() => {
-    //         console.log("Update");
-    //         this.dispatchEvent(
-    //             new ShowToastEvent({
-    //                 title: 'Success',
-    //                 message: 'Data updated',
-    //                 variant: 'success'
-    //             })
-    //         );
-    //         // Clear all draft values
-    //         this.draftValues = [];
-
-    //         // Display fresh data in the datatable
-    //         return refreshApex(this.emps);
-    //     }).catch(error => {
-    //         this.dispatchEvent(
-    //             new ShowToastEvent({
-    //                 title: 'Error creating record',
-    //                 message: error.body.message,
-    //                 variant: 'error'
-    //             })
-    //         );
-    //     });
-    // }
+    
     handleSave(event) {
         console.log("save");
         const recordInputs =  event.detail.draftValues.slice().map(draft => {
@@ -208,7 +171,6 @@ export default class EmployeeComponent extends LightningElement {
              this.draftValues = [];
     
              // Display fresh data in the datatable
-            //  location.reload();
              return refreshApex(this.emps);
         }).catch(error => {
             // Handle error
