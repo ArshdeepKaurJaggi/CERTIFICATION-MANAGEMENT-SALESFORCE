@@ -23,12 +23,12 @@ import fetchPickListValue from '@salesforce/apex/fetchstatusvalues.fetchStatusPi
 import getList from '@salesforce/apex/getVoucher.getList';
 import getCertReq from '@salesforce/apex/fetchcertreq.getCertRList';
 const cols=[
-    // { label: 'Request Id', fieldName: 'Name'},
-    // { label: 'Certification  Name', fieldName: 'Certification__c', editable: 'true'},
-    // { label: 'Employee Name', fieldName: 'Employee__c', editable: 'true' },
+    { label: 'Request Id', fieldName: 'Name'},
+    { label: 'Certification  Name', fieldName: 'Certification__c', editable: 'true'},
+    { label: 'Employee Name', fieldName: 'Employee__c', editable: 'true' },
     { label: 'Due Date', fieldName: 'Due_Date__c', editable: 'true'},
     { label: 'Comments', fieldName: 'Comments__c', editable: 'true'},
-    // { label: 'Voucher', fieldName: 'Voucher__c', editable: 'true'},
+    { label: 'Voucher', fieldName: 'Voucher__c', editable: 'true'},
     { label: 'Status', fieldName: 'Status__c', editable: 'true'},
     { label: 'Email_Recipient', fieldName: 'Email_Recipient__c', editable: 'true'}];
 export default class CertificationrequestComponent extends LightningElement {
@@ -51,7 +51,19 @@ export default class CertificationrequestComponent extends LightningElement {
     Certification_Request__c(result) {
         this.refreshing = result;
         if (result.data) {
-            this.data = result.data;
+            let values = [];
+            result.data.forEach(i => {
+                let value = {};
+                value.Name = i.Name;
+                value.Certification__c = i.Certification__r.Cert_Name__c;
+                value.Employee__c = i.Employee__r.Emp_Name__c;
+                value.Due_Date__c = i.Due_Date__c;
+                value.Status__c = i.Status__c;
+                value.Voucher__c = i.Voucher__r.Voucher_Name__c;
+                value.Comments__c = i.Comments__c;
+                values.push(value);
+            });
+            this.data = values;
             console.log(result.data);
             this.error = undefined;
         } else if (result.error) {
