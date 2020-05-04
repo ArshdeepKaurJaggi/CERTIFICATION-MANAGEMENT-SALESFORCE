@@ -23,7 +23,7 @@ import getemp from '@salesforce/apex/getDataFromEmployee.getemp';
 const COLS = [
     { label: 'ID', fieldName: 'Name'},
     { label: 'Name', fieldName: 'Emp_Name__c', editable: true },
-    { label: 'Email', fieldName: 'Emp_Email__c', editable: true},
+    { label: 'Email', fieldName: 'Emp_Email__c', editable: true,  type: 'email'},
     { label: 'Primary Skills', fieldName: 'Primary_Skill__c', editable: true },
     { label: 'Secondary Skills', fieldName: 'Secondary_Skill__c', editable: true },
     { label: 'Experience', fieldName: 'Experience__c', editable: true },
