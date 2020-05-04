@@ -22,9 +22,9 @@ const cols=[
     { label: 'Voucher Id', fieldName: 'Name'},
     { label: 'Voucher Name', fieldName: 'Voucher_Name__c', editable: 'true'},
     { label: 'Voucher Cost', fieldName: 'Voucher_Cost__c', editable: 'true', type: 'currency', typeAttributes: { currencyCode: 'INR'}, cellAttributes: { alignment: 'left' } },
-    { label: 'Voucher Validity', fieldName: 'Validity__c', editable: 'true'},
+    { label: 'Voucher Validity', fieldName: 'Validity__c', editable: 'true',type:'date'},
     { label: 'Active', fieldName: 'Active__c', editable: 'true'},
-   
+
 ];
 
 export default class Vouchercomponent extends LightningElement {
@@ -87,7 +87,6 @@ export default class Vouchercomponent extends LightningElement {
         });
     }
     handleClickAdd() {
-
         var el = this.template.querySelector('lightning-datatable');
         var selected = el.getSelectedRows();
         let selectedIdsArray = [];
@@ -122,7 +121,6 @@ export default class Vouchercomponent extends LightningElement {
             });
             
             return refreshApex(this.vo);
-            s
     }
 
 }

@@ -1,7 +1,9 @@
 <template>
+    <!-- lightning tab for different tabs-->
     <lightning-tabset>
         <lightning-tab label="Add Certification">
             <lightning-card title="Certification" icon-name="action:clone">
+                 <!-- record-edit form to add data -->
                 <lightning-record-edit-form object-api-name="Certification__c">
                     <div class="slds-m-around_medium">
                         <lightning-input label="Certification Name" onchange={handlechange}></lightning-input>
@@ -10,12 +12,14 @@
                         <!-- <lightning-button class="slds-m-top_small" label="Cancel" onclick={handleReset}></lightning-button> -->
                     </div>
                 </lightning-record-edit-form>
+                 <!-- record-edit form to add data -->
             </lightning-card>
         </lightning-tab>
         <lightning-tab label="Certification Details" title="2nd tab extended title">
             <lightning-card title="Certification" icon-name="action:clone">
                 <div class="slds-m-around_medium">
                     <template if:true={cert.data}>
+                        <!-- data table to display data -->
                         <lightning-datatable
                             key-field="Id"
                             onsave={handleSave}
@@ -23,6 +27,7 @@
                             onrowselection={handleClickAdd}
                             draft-values={draftValues}
                             columns={columns}></lightning-datatable>
+                            <!-- data table to display data -->
                             <center><lightning-button variant="destructive" 
                                 label="Delete" 
                                 icon-name="utility:delete"
@@ -36,5 +41,6 @@
                 
             </lightning-card>
         </lightning-tab>
-    </lightning-tabset>  
+    </lightning-tabset> 
+    <!-- lightning tab for different tabs--> 
 </template>

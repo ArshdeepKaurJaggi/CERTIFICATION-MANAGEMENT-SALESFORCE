@@ -103,16 +103,6 @@ export default class EmployeeComponent extends LightningElement {
         return refreshApex(this.emps);
         location.reload();
     }
-    handleReset(event) {
-        const inputFields = this.template.querySelectorAll(
-            'lightning-input'
-        );
-        if (inputFields) {
-            inputFields.forEach(field => {
-                field.reset();
-            });
-        }
-     }
      handleClickAdd() {
 
         var el = this.template.querySelector('lightning-datatable');

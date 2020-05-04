@@ -1,8 +1,10 @@
 <template>
+    <!-- lightning tab for different tabs--> 
     <lightning-tabset>
         <lightning-tab label="Add Certification Request">
             <lightning-card title="Certification Request" icon-name="standard:skill_requirement">
                 <div style="margin: auto;">
+                    <!-- To add data to data table -->
                     <lightning-record-form object-api-name="Certification_Request__c" onsuccess={handleSuccess} fields={fields}>
                     </lightning-record-form>
                 </div>
@@ -12,6 +14,7 @@
             <lightning-card title="Certification" icon-name="standard:skill_requirement">
                 <div class="slds-m-around_medium">
                     <template if:true={data}>
+                        <!-- To view data and update -->
                         <lightning-datatable
                             key-field="Id"
                             data={data}
@@ -30,5 +33,6 @@
                 </div> 
             </lightning-card>
         </lightning-tab>
-    </lightning-tabset>  
+    </lightning-tabset> 
+    <!-- lightning tab for different tabs-->  
 </template>

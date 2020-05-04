@@ -24,13 +24,10 @@ import getList from '@salesforce/apex/getVoucher.getList';
 import getCertReq from '@salesforce/apex/fetchcertreq.getCertRList';
 const cols=[
     { label: 'Request Id', fieldName: 'Name'},
-    { label: 'Certification  Name', fieldName: 'Certification__c', editable: 'true'},
-    { label: 'Employee Name', fieldName: 'Employee__c', editable: 'true' },
-    { label: 'Due Date', fieldName: 'Due_Date__c', editable: 'true'},
+    { label: 'Due Date', fieldName: 'Due_Date__c', editable: 'true',type:'date'},
     { label: 'Comments', fieldName: 'Comments__c', editable: 'true'},
-    { label: 'Voucher', fieldName: 'Voucher__c', editable: 'true'},
     { label: 'Status', fieldName: 'Status__c', editable: 'true'},
-    { label: 'Email_Recipient', fieldName: 'Email_Recipient__c', editable: 'true'}];
+    { label: 'Email Recipient', fieldName: 'Email_Recipient__c',type:'email'}];
 export default class CertificationrequestComponent extends LightningElement {
     @api buttonlabel="Add Certification Request";
     @track recId;

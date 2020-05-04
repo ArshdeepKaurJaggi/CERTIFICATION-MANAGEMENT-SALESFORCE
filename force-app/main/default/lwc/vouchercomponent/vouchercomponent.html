@@ -1,8 +1,10 @@
 <template>
+    <!-- lightning tab for different tabs--> 
     <lightning-tabset>
         <lightning-tab label="Add Voucher">
             <lightning-card title="Add an Voucher" icon-name="action:user">
                 <div style="margin: auto;">
+                    <!-- To add data to object -->
                     <lightning-record-form object-api-name="Voucher__c" onsuccess={handleSuccess} fields={fields}>
                     </lightning-record-form>
                 </div>
@@ -12,6 +14,7 @@
             <lightning-card title="Voucher" icon-name="standard:record">
                 <div class="slds-m-around_medium">
                     <template if:true={data}>
+                        <!-- To display data -->
                         <lightning-datatable key-field="Id" data={data} columns={columns}
                         onsave={handleSave}
                         onrowselection={handleClickAdd}
@@ -26,4 +29,5 @@
             </lightning-card>
         </lightning-tab>
     </lightning-tabset>
+    <!-- lightning tab for different tabs--> 
 </template>
