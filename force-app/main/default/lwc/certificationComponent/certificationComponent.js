@@ -65,8 +65,7 @@ export default class CertificationComponent extends LightningElement {
                 }),
             );
         });
-        //location.reload();
-        return refreshApex(this.cert);
+        location.reload();
     }
 
     handleClickAdd() {

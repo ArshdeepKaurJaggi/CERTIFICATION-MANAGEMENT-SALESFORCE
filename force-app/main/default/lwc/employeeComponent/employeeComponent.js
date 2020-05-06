@@ -90,6 +90,8 @@ export default class EmployeeComponent extends LightningElement {
                         variant: 'success',
                     }),
                 );
+                location.reload();
+                
             })
         .catch(error => {
             this.dispatchEvent(
@@ -99,9 +101,7 @@ export default class EmployeeComponent extends LightningElement {
                     variant: 'error',
                 }),
             );
-        });
-        return refreshApex(this.emps);
-        location.reload();
+        }); 
     }
      handleClickAdd() {
 
