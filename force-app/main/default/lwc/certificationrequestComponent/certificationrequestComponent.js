@@ -22,16 +22,19 @@ import {
 import fetchPickListValue from '@salesforce/apex/fetchstatusvalues.fetchStatusPickListValue';
 import getList from '@salesforce/apex/getVoucher.getList';
 import getCertReq from '@salesforce/apex/fetchcertreq.getCertRList';
-const cols=[
-    { label: 'Request Id', fieldName: 'Name'},
-    { label: 'Due Date', fieldName: 'Due_Date__c', editable: 'true',type:'date'},
-    { label: 'Comments', fieldName: 'Comments__c', editable: 'true'},
-    { label: 'Status', fieldName: 'Status__c', editable: 'true'},
-    { label: 'Email Recipient', fieldName: 'Email_Recipient__c',type:'email'}];
+const cols = [
+    { label: 'Request Id', fieldName: 'Name' },
+    { label: 'Certification Name', fieldName: 'Certification__c' },
+    { label: 'Employee Name', fieldName: 'Employee__c' },
+    { label: 'Voucher Name', fieldName: 'Voucher__c' },
+    { label: 'Due Date', fieldName: 'Due_Date__c', editable: 'true', type: 'date' },
+    { label: 'Comments', fieldName: 'Comments__c', editable: 'true' },
+    { label: 'Status', fieldName: 'Status__c', editable: 'true' }
+];
 export default class CertificationrequestComponent extends LightningElement {
-    @api buttonlabel="Add Certification Request";
+    @api buttonlabel = "Add Certification Request";
     @track recId;
-    fields = [Cert_field, Cert_Emp, Cert_DueDate,Cert_Comments,Cert_Voucher,Cert_Status,Cert_EmailR];
+    fields = [Cert_field, Cert_Emp, Cert_DueDate, Cert_Comments, Cert_Voucher, Cert_Status, Cert_EmailR];
 
     handleSuccess(event) {
         this.dispatchEvent(new ShowToastEvent({
@@ -42,14 +45,32 @@ export default class CertificationrequestComponent extends LightningElement {
         location.reload();
     }
     @track data;
-    @track columns=cols;
-    @wire(getCertReq)certreqwire;
+    @track columns = cols;
+    @wire(getCertReq) certreqwire;
     @wire(getCertReq)
     Certification_Request__c(result) {
         this.refreshing = result;
         if (result.data) {
-            this.data = result.data;
+            let values = [];
+            result.data.forEach(i => {
+                let value = {};
+                value.Id = i.Id;
+                value.Name = i.Name;
+                value.Certification__c = i.Certification__r.Cert_Name__c;
+                value.Employee__c = i.Employee__r.Emp_Name__c;
+                value.Due_Date__c = i.Due_Date__c;
+                value.Status__c = i.Status__c;
+                if (i.hasOwnProperty('Voucher__r')) {
+                    value.Voucher__c = i.Voucher__r.Voucher_Name__c;
+                } else {
+                    value.Voucher__c = "";
+                }
+                value.Comments__c = i.Comments__c;
+                values.push(value);
+            });
+            this.data = values;
             console.log(result.data);
+            // this.data = result.data;
             this.error = undefined;
         } else if (result.error) {
             this.data = undefined;
@@ -60,11 +81,11 @@ export default class CertificationrequestComponent extends LightningElement {
 
     handleSave(event) {
         console.log("save");
-        const recordInputs =  event.detail.draftValues.slice().map(draft => {
+        const recordInputs = event.detail.draftValues.slice().map(draft => {
             const fields = Object.assign({}, draft);
             return { fields };
         });
-    
+
         const promises = recordInputs.map(recordInput => updateRecord(recordInput));
         Promise.all(promises).then(EMP => {
             this.dispatchEvent(
@@ -74,11 +95,11 @@ export default class CertificationrequestComponent extends LightningElement {
                     variant: 'success'
                 })
             );
-             // Clear all draft values
-             this.draftValues = [];
-    
-             // Display fresh data in the datatable
-             return refreshApex(this.certreqwire);
+            // Clear all draft values
+            this.draftValues = [];
+
+            // Display fresh data in the datatable
+            return refreshApex(this.certreqwire);
         }).catch(error => {
             // Handle error
         });
@@ -95,8 +116,8 @@ export default class CertificationrequestComponent extends LightningElement {
         }
         this.recId = selectedIdsArray[0];
         console.log(this.recId);
-     }
-     deleteRec(event) {
+    }
+    deleteRec(event) {
         console.log('delete');
         deleteRecord(this.recId)
             .then(() => {
@@ -117,8 +138,8 @@ export default class CertificationrequestComponent extends LightningElement {
                     })
                 );
             });
-            
-            return refreshApex(this.certreqwire);
-            
+
+        return refreshApex(this.certreqwire);
+
     }
 }

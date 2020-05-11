@@ -23,8 +23,8 @@ const cols=[
     { label: 'Voucher Name', fieldName: 'Voucher_Name__c', editable: 'true'},
     { label: 'Voucher Cost', fieldName: 'Voucher_Cost__c', editable: 'true', type: 'currency', typeAttributes: { currencyCode: 'INR'}, cellAttributes: { alignment: 'left' } },
     { label: 'Voucher Validity', fieldName: 'Validity__c', editable: 'true',type:'date'},
+    { label: 'Certification Name', fieldName: 'Certification__c', type: 'text' },
     { label: 'Active', fieldName: 'Active__c', editable: 'true'},
-
 ];
 
 export default class Vouchercomponent extends LightningElement {
@@ -52,7 +52,19 @@ export default class Vouchercomponent extends LightningElement {
     Voucher__c(result) {
         this.refreshing = result;
         if (result.data) {
-            this.data = result.data;
+            let values = [];
+            result.data.forEach(request => {
+                let value = {};
+                value.Id = request.Id;
+                value.Name = request.Name;
+                value.Voucher_Name__c = request.Voucher_Name__c;
+                value.Voucher_Cost__c = request.Voucher_Cost__c;
+                value.Validity__c = request.Validity__c;
+                value.Active__c = request.Active__c;
+                value.Certification__c = request.Certification__r.Cert_Name__c;
+                values.push(value);
+            });
+            this.data = values;
             this.error = undefined;
         } else if (result.error) {
             this.data = undefined;
