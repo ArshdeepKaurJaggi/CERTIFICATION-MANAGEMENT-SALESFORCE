@@ -34,7 +34,7 @@ const cols = [
 export default class CertificationrequestComponent extends LightningElement {
     @api buttonlabel = "Add Certification Request";
     @track recId;
-    fields = [Cert_field, Cert_Emp, Cert_DueDate, Cert_Comments, Cert_Voucher, Cert_Status, Cert_EmailR];
+    fields = [Cert_field, Cert_Emp, Cert_DueDate, Cert_Comments, Cert_Voucher, Cert_Status];
 
     handleSuccess(event) {
         this.dispatchEvent(new ShowToastEvent({
