@@ -61,7 +61,12 @@ export default class Vouchercomponent extends LightningElement {
                 value.Voucher_Cost__c = request.Voucher_Cost__c;
                 value.Validity__c = request.Validity__c;
                 value.Active__c = request.Active__c;
-                value.Certification__c = request.Certification__r.Cert_Name__c;
+                if (request.hasOwnProperty('Certification__r')) {
+                    value.Certification__c = request.Certification__r.Cert_Name__c;
+                } else {
+                    value.Certification__c = "";
+                }
+                // value.Certification__c = request.Certification__r.Cert_Name__c;
                 values.push(value);
             });
             this.data = values;
